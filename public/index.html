@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080e1c">
+
+    <meta name="description"
+        content="LunaMind is an educational lunar habitat mission-control and survival simulation.">
+
+    <title>LunaMind | Lunar Mission Control</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- =================================
+         MISSION CONTROL NAVIGATION
+    ================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🌕 LUNAMIND
+            <span>LUNAR OPERATIONS CENTER</span>
+        </div>
+
+        <div class="nav-status">
+            <span class="live-dot"></span>
+            SIMULATION ONLINE
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <!-- =================================
+             HERO / MISSION INTRODUCTION
+        ================================== -->
+
+        <section class="hero-section">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    LUNAR EXPLORATION PROGRAM
+                </p>
+
+                <h1>
+                    LUNAR<br>
+                    <span>MISSION CONTROL</span>
+                </h1>
+
+                <p class="hero-description">
+                    Welcome to the LunaMind Lunar Operations Center.
+
+                    Monitor habitat systems, coordinate your crew,
+                    manage essential resources and respond to
+                    simulated mission events during a seven-day
+                    lunar surface expedition.
+                </p>
+
+                <button id="startBtn">
+                    🚀 INITIATE MISSION
+                </button>
+
+            </div>
+
+            <div class="hero-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1200"
+                    alt="Earth viewed from space">
+
+            </div>
+
+            <div class="hero-bottom">
+
+                <span>DESTINATION: LUNAR SURFACE</span>
+
+                <span>MISSION: LUNAR HABITAT</span>
+
+                <span>DURATION: 7 SIMULATED DAYS</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             MISSION OVERVIEW
+        ================================== -->
+
+        <section class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    FLIGHT OPERATIONS
+                </p>
+
+                <h2>Mission Overview</h2>
+
+            </div>
+
+            <span class="mission-tag">
+                ● SIMULATION READY
+            </span>
+
+        </section>
+
+
+        <!-- =================================
+             MISSION TELEMETRY
+        ================================== -->
+
+        <section class="dashboard">
+
+            <div class="resource-header">
+
+                <h2>Habitat Resource Telemetry</h2>
+
+                <p>
+                    Simulated remaining resource capacity
+                </p>
+
+            </div>
+
+            <div class="resources">
+
+                <!-- OXYGEN -->
+
+                <div class="resource">
+
+                    <div class="resource-icon">🫁</div>
+
+                    <h3>OXYGEN</h3>
+
+                    <p id="oxygen">100%</p>
+
+                    <div class="resource-bar">
+
+                        <div
+                            id="oxygenBar"
+                            class="resource-fill">
+                        </div>
+
+                    </div>
+
+                    <span>Life-support reserve</span>
+
+                </div>
+
+
+                <!-- WATER -->
+
+                <div class="resource">
+
+                    <div class="resource-icon">💧</div>
+
+                    <h3>WATER</h3>
+
+                    <p id="water">100%</p>
+
+                    <div class="resource-bar">
+
+                        <div
+                            id="waterBar"
+                            class="resource-fill">
+                        </div>
+
+                    </div>
+
+                    <span>Water reserve</span>
+
+                </div>
+
+
+                <!-- FOOD -->
+
+                <div class="resource">
+
+                    <div class="resource-icon">🥫</div>
+
+                    <h3>FOOD</h3>
+
+                    <p id="food">100%</p>
+
+                    <div class="resource-bar">
+
+                        <div
+                            id="foodBar"
+                            class="resource-fill">
+                        </div>
+
+                    </div>
+
+                    <span>Stored food supply</span>
+
+                </div>
+
+
+                <!-- POWER -->
+
+                <div class="resource">
+
+                    <div class="resource-icon">⚡</div>
+
+                    <h3>POWER</h3>
+
+                    <p id="power">100%</p>
+
+                    <div class="resource-bar">
+
+                        <div
+                            id="powerBar"
+                            class="resource-fill">
+                        </div>
+
+                    </div>
+
+                    <span>Electrical energy reserve</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             OPERATIONS & CREW
+        ================================== -->
+
+        <section class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    HABITAT OPERATIONS
+                </p>
+
+                <h2>Flight Operations Center</h2>
+
+            </div>
+
+            <span class="mission-tag">
+                LUNAR OUTPOST
+            </span>
+
+        </section>
+
+
+        <section class="control-grid">
+
+
+            <!-- MISSION STATUS -->
+
+            <div class="control-card">
+
+                <p class="eyebrow">
+                    FLIGHT DIRECTOR CONSOLE
+                </p>
+
+                <h2>Mission Status</h2>
+
+                <div id="missionStatus">
+
+                    Habitat systems initialized.
+                    Awaiting commander authorization.
+
+                </div>
+
+                <button
+                    id="nextDayBtn"
+                    disabled>
+
+                    ⏩ ADVANCE MISSION DAY
+
+                </button>
+
+            </div>
+
+
+            <!-- CREW STATUS -->
+
+            <div class="control-card crew-card">
+
+                <p class="eyebrow">
+                    CREW OPERATIONS
+                </p>
+
+                <h2>Assigned Crew</h2>
+
+
+                <div class="crew-member">
+
+                    <div class="crew-avatar">
+                        👨‍🚀
+                    </div>
+
+                    <div>
+
+                        <h3>Lunar Commander</h3>
+
+                        <span>
+                            Mission Leadership
+                        </span>
+
+                    </div>
+
+                    <span class="crew-status">
+                        READY
+                    </span>
+
+                </div>
+
+
+                <div class="crew-member">
+
+                    <div class="crew-avatar">
+                        👩‍🚀
+                    </div>
+
+                    <div>
+
+                        <h3>Science Officer</h3>
+
+                        <span>
+                            Scientific Research
+                        </span>
+
+                    </div>
+
+                    <span class="crew-status">
+                        READY
+                    </span>
+
+                </div>
+
+
+                <div class="crew-member">
+
+                    <div class="crew-avatar">
+                        👨‍🚀
+                    </div>
+
+                    <div>
+
+                        <h3>Systems Engineer</h3>
+
+                        <span>
+                            Habitat Engineering
+                        </span>
+
+                    </div>
+
+                    <span class="crew-status">
+                        READY
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             MISSION OBJECTIVES
+        ================================== -->
+
+        <section class="objectives">
+
+            <p class="eyebrow">
+                FLIGHT PLAN
+            </p>
+
+            <h2>Primary Mission Objectives</h2>
+
+            <div class="objective-list">
+
+                <div class="objective">
+
+                    <span>01</span>
+
+                    <p>
+                        Maintain simulated life-support
+                        and habitat resource reserves.
+                    </p>
+
+                </div>
+
+
+                <div class="objective">
+
+                    <span>02</span>
+
+                    <p>
+                        Monitor environmental conditions
+                        and respond to mission alerts.
+                    </p>
+
+                </div>
+
+
+                <div class="objective">
+
+                    <span>03</span>
+
+                    <p>
+                        Coordinate crew activities and
+                        manage habitat energy systems.
+                    </p>
+
+                </div>
+
+
+                <div class="objective">
+
+                    <span>04</span>
+
+                    <p>
+                        Review NASA space-weather
+                        notifications and scientific observations.
+                    </p>
+
+                </div>
+
+
+                <div class="objective">
+
+                    <span>05</span>
+
+                    <p>
+                        Complete the seven-day lunar
+                        habitat simulation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+       
+<!-- =================================
+     NASA RADLAB RADIATION RESEARCH
+================================== -->
+
+<section class="radiation-section" id="radiationResearch">
+
+    <div class="radiation-heading">
+
+        <span class="section-tag">
+            NASA RADLAB • SCIENTIFIC DATA
+        </span>
+
+        <h2>Radiation Research</h2>
+
+        <p>
+            Radiation measurements from real spaceflight instruments.
+        </p>
+
+    </div>
+
+    <div class="radiation-panel">
+
+        <!-- DATA SOURCE -->
+
+        <div class="radiation-topbar">
+
+            <div>
+                <span class="radiation-label">DATA SOURCE</span>
+                <h3>NASA RadLab</h3>
+            </div>
+
+            <span id="radiationStatus" class="radiation-status">
+                CONNECTING...
+            </span>
+
+        </div>
+
+        <!-- RADIATION MEASUREMENTS -->
+
+        <div class="radiation-stats">
+
+            <div class="radiation-stat">
+                <span>ABSORBED DOSE RATE</span>
+                <h2 id="absorbedDose">--</h2>
+                <small>μGy/hour</small>
+            </div>
+
+            <div class="radiation-stat">
+                <span>DOSE EQUIVALENT RATE</span>
+                <h2 id="doseEquivalent">--</h2>
+                <small>μSv/hour</small>
+            </div>
+
+            <div class="radiation-stat">
+                <span>PARTICLE FLUX</span>
+                <h2 id="particleFlux">--</h2>
+                <small>cm⁻² sr⁻¹ s⁻¹</small>
+            </div>
+
+        </div>
+
+        <!-- MEASUREMENT DETAILS -->
+
+        <div class="radiation-details">
+
+            <p>
+                Spacecraft:
+                <strong id="radiationSpacecraft">--</strong>
+            </p>
+
+            <p>
+                Instrument:
+                <strong id="radiationInstrument">--</strong>
+            </p>
+
+            <p>
+                Measurement time:
+                <strong id="radiationTimestamp">--</strong>
+            </p>
+
+        </div>
+
+        <!-- NEW: RADIATION HISTORY GRAPH -->
+
+        <div class="radiation-chart-card">
+
+            <div class="radiation-chart-heading">
+
+                <div>
+                    <h3>Radiation History</h3>
+                    <p>ISS absorbed dose rate over time</p>
+                </div>
+
+                <span class="chart-live-label">
+                    HISTORICAL DATA
+                </span>
+
+            </div>
+
+            <div class="radiation-chart-container">
+                <canvas id="radiationChart"></canvas>
+            </div>
+
+            <p class="radiation-chart-note">
+                Source: NASA RadLab • DosTel instruments
+            </p>
+
+        </div>
+
+        <!-- STATUS MESSAGE -->
+
+        <p id="radiationMessage" class="radiation-message">
+            Waiting for NASA measurements...
+        </p>
+
+        <!-- REFRESH -->
+
+        <button id="refreshRadiationBtn" type="button">
+            🔄 REFRESH MEASUREMENTS
+        </button>
+
+        <!-- NASA RADLAB LINK -->
+
+        <a
+            href="https://visualization.osdr.nasa.gov/radlab/"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            Explore NASA RadLab →
+
+        </a>
+
+    </div>
+
+</section>
+
+
+        <!-- =================================
+             MISSION DATA DISCLAIMER
+        ================================== -->
+
+        <section class="objectives">
+
+            <p class="eyebrow">
+                SCIENTIFIC DATA INTEGRITY
+            </p>
+
+            <h2>Real Data. Simulated Mission.</h2>
+
+            <p>
+                LunaMind uses NASA DONKI space-weather
+                notifications and NASA RadLab scientific
+                radiation measurements as real-world data sources.
+            </p>
+
+            <p>
+                Habitat resource levels, mission events,
+                crew decisions and survival outcomes are
+                educational simulations. They are not
+                operational NASA spacecraft telemetry
+                or predictions of actual lunar conditions.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <h2>🌕 LUNAMIND</h2>
+
+        <p>
+            EXPLORE. MONITOR. DECIDE. DISCOVER.
+        </p>
+
+        <span>
+            Educational Lunar Mission Control Simulation
+        </span>
+
+        <span>
+            NASA DONKI + NASA RadLab data integration
+        </span>
+
+    </footer>
+
+
+<!-- LUNAMIND BACKGROUND MUSIC -->
+
+<div class="music-player">
+
+    <audio id="spaceMusic" loop preload="none">
+        <source src="audio/space-ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicToggle" type="button">
+        🎵 PLAY SPACE MUSIC
+    </button>
+
+    <div class="music-volume">
+        <span>🔉</span>
+        <input
+            type="range"
+            id="musicVolume"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.25">
+    </div>
+
+</div>
+
+</body>
+
+</html>

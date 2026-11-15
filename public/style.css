@@ -1,0 +1,2281 @@
+
+/* =====================================================
+   LUNAMIND — COSMIC DREAM
+   Cinematic Lunar Mission Control
+   Cleaned + Enhanced Edition
+===================================================== */
+
+:root {
+    --bg: #080817;
+    --bg-soft: #111126;
+    --panel: rgba(24, 24, 52, 0.86);
+    --panel-light: rgba(39, 34, 70, 0.82);
+
+    --white: #ffffff;
+    --text: #f5efff;
+    --muted: #c8bfdc;
+    --dim: #968caf;
+
+    --pink: #ff91ce;
+    --pink-bright: #ff62b5;
+    --purple: #ad91ff;
+    --violet: #8067dc;
+    --cyan: #83eaff;
+
+    --green: #79e8bd;
+    --yellow: #ffd58c;
+    --red: #ff818e;
+
+    --border: rgba(210, 165, 255, 0.2);
+    --radius: 17px;
+
+    --shadow: 0 14px 38px rgba(0, 0, 0, 0.3);
+}
+
+/* =====================================================
+   1. GLOBAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(ellipse at 12% 15%, rgba(129, 69, 173, 0.25), transparent 38%),
+        radial-gradient(ellipse at 88% 35%, rgba(63, 87, 165, 0.2), transparent 38%),
+        radial-gradient(ellipse at 50% 85%, rgba(177, 65, 137, 0.14), transparent 42%),
+        var(--bg);
+
+    font-family: "Segoe UI", Inter, Arial, sans-serif;
+    line-height: 1.65;
+}
+
+/* =====================================================
+   2. GALAXY ATMOSPHERE
+===================================================== */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 23% 75%, #d5c6ff, transparent),
+        radial-gradient(2px 2px at 42% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 65% 18%, #ffb8e4, transparent),
+        radial-gradient(2px 2px at 82% 62%, #fff, transparent),
+        radial-gradient(1px 1px at 94% 35%, #b9dfff, transparent);
+
+    background-size: 310px 280px;
+    opacity: 0.55;
+
+    animation: starMovement 12s ease-in-out infinite alternate;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(196, 91, 194, 0.1), transparent 42%),
+        radial-gradient(ellipse at 80% 80%, rgba(98, 103, 210, 0.12), transparent 45%);
+
+    animation: nebulaBreathing 14s ease-in-out infinite alternate;
+}
+
+@keyframes starMovement {
+    from {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0.8;
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes nebulaBreathing {
+    from {
+        opacity: 0.55;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+/* =====================================================
+   3. NAVIGATION
+===================================================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    min-height: 72px;
+    padding: 12px 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(8, 8, 23, 0.88);
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+.logo {
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    text-shadow: 0 0 16px rgba(255, 145, 206, 0.4);
+}
+
+.logo span {
+    display: block;
+    margin-top: 1px;
+
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.nav-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+
+    animation: livePulse 2s infinite;
+}
+
+@keyframes livePulse {
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* =====================================================
+   4. HERO SECTION
+===================================================== */
+
+.hero-section {
+    position: relative;
+    isolation: isolate;
+
+    width: 90%;
+    max-width: 1450px;
+    min-height: 490px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 30px auto;
+    overflow: hidden;
+
+    border: 1px solid rgba(226, 159, 240, 0.3);
+    border-radius: 22px;
+
+    background: #101027;
+
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, 0.35),
+        0 0 35px rgba(187, 100, 220, 0.12);
+
+    transition:
+        box-shadow 0.5s ease,
+        border-color 0.5s ease;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0.68;
+    filter: brightness(0.72) saturate(0.9);
+
+    animation: lunarZoom 26s ease-in-out infinite alternate;
+
+    transition: filter 0.5s ease;
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7, 8, 24, 0.98) 0%,
+            rgba(11, 10, 32, 0.87) 48%,
+            rgba(11, 10, 32, 0.22) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(8, 8, 23, 0.7),
+            transparent 40%
+        );
+}
+
+.hero-section:hover {
+    border-color: rgba(255, 145, 206, 0.65);
+
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.4),
+        0 0 35px rgba(226, 105, 196, 0.2);
+}
+
+.hero-section:hover .hero-image img {
+    filter: brightness(0.88) saturate(1.15);
+}
+
+@keyframes lunarZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.07);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: 68%;
+    padding: 65px 55px 90px;
+
+    color: var(--white);
+}
+
+.eyebrow,
+.report-eyebrow,
+.celebration-eyebrow {
+    color: var(--pink);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.hero-content h1 {
+    margin: 17px 0;
+
+    color: var(--white);
+    font-size: clamp(38px, 5vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+
+    text-shadow:
+        0 0 22px rgba(255, 145, 206, 0.25),
+        0 3px 15px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content h1 span {
+    color: var(--pink);
+}
+
+.hero-content .hero-description {
+    max-width: 540px;
+
+    color: #eee7fa;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.hero-bottom {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    left: 30px;
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 25px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: #e0d5ef;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* =====================================================
+   5. BUTTONS — COSMIC INTERACTIONS
+===================================================== */
+
+button {
+    position: relative;
+
+    min-height: 44px;
+    padding: 12px 20px;
+
+    color: #fff;
+
+    background: linear-gradient(135deg, #a75ca7, #6555b5);
+
+    border: 1px solid rgba(255, 177, 228, 0.4);
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 18px rgba(160, 83, 169, 0.2);
+
+    transition:
+        transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        filter 0.35s ease;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.045);
+
+    background: linear-gradient(135deg, #c66eb5, #7667d2);
+
+    border-color: rgba(255, 190, 230, 0.8);
+
+    box-shadow:
+        0 10px 28px rgba(255, 145, 206, 0.3),
+        0 0 18px rgba(166, 107, 218, 0.2);
+
+    filter: brightness(1.12);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0) scale(0.96);
+
+    box-shadow: 0 4px 12px rgba(236, 121, 189, 0.25);
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#startBtn,
+#nextDayBtn {
+    background: linear-gradient(135deg, #b75caa, #7056c7);
+}
+
+/* Special START button */
+
+#startBtn {
+    padding: 14px 26px;
+    border-radius: 12px;
+}
+
+#startBtn:hover:not(:disabled) {
+    transform: translateY(-5px) scale(1.09);
+
+    box-shadow:
+        0 12px 32px rgba(236, 121, 189, 0.45),
+        0 0 28px rgba(166, 107, 218, 0.35);
+
+    filter: brightness(1.18);
+}
+
+/* =====================================================
+   6. MAIN LAYOUT
+===================================================== */
+
+main {
+    width: 90%;
+    max-width: 1450px;
+
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 36px 0 18px;
+}
+
+.section-heading h2,
+.control-card h2,
+.crew-card h2,
+.objectives h2 {
+    margin: 0 0 10px;
+
+    color: #f6edff;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.mission-tag {
+    padding: 7px 12px;
+
+    color: var(--green);
+    background: rgba(121, 232, 189, 0.08);
+
+    border: 1px solid rgba(121, 232, 189, 0.22);
+    border-radius: 30px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* =====================================================
+   7. RESOURCE DASHBOARD
+===================================================== */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+.resource-header {
+    grid-column: 1 / -1;
+    margin-bottom: 2px;
+}
+
+.resource-header h2 {
+    margin: 0;
+    color: var(--white);
+    font-size: 19px;
+}
+
+.resource-header p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.resources {
+    display: contents;
+}
+
+.resource {
+    min-width: 0;
+    padding: 22px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(35, 31, 69, 0.91),
+        rgba(15, 17, 43, 0.95)
+    );
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.resource:hover {
+    border-color: rgba(255, 145, 206, 0.55);
+    transform: translateY(-5px) scale(1.025);
+
+    box-shadow: 0 14px 32px rgba(190, 91, 176, 0.18);
+}
+
+.resource-icon {
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.resource h3 {
+    margin: 0 0 8px;
+
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.resource p {
+    margin: 0;
+
+    color: var(--white);
+    font-size: 31px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.resource span {
+    display: block;
+    margin-top: 10px;
+
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.resource-bar,
+.resource-track,
+.resource-alert-track,
+.alert-resource-track,
+.score-track {
+    height: 7px;
+    margin-top: 14px;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+.resource-bar div,
+.resource-bar span,
+.resource-fill,
+.resource-alert-fill,
+.alert-resource-fill {
+    display: block;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: linear-gradient(90deg, #b77ce8, #ff9bd5);
+
+    transition: width 0.5s ease;
+}
+
+#oxygenBar {
+    background: linear-gradient(90deg, #718cff, #8ce8ff);
+}
+
+#waterBar {
+    background: linear-gradient(90deg, #557fe8, #8dcaff);
+}
+
+#foodBar {
+    background: linear-gradient(90deg, #50ba9b, #94edc1);
+}
+
+#powerBar {
+    background: linear-gradient(90deg, #c17ce8, #ffb0dc);
+}
+
+.resource-update {
+    animation: resourceUpdate 0.5s ease;
+}
+
+@keyframes resourceUpdate {
+    50% {
+        color: var(--pink);
+    }
+}
+
+/* =====================================================
+   8. CONTROL PANELS
+===================================================== */
+
+.control-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.control-card,
+.crew-card,
+.objectives {
+    padding: 25px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(30, 27, 60, 0.9),
+        rgba(16, 17, 43, 0.94)
+    );
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+}
+
+#missionStatus {
+    min-height: 65px;
+    margin: 15px 0;
+    padding: 14px;
+
+    color: var(--green);
+    background: rgba(121, 232, 189, 0.06);
+
+    border: 1px solid rgba(121, 232, 189, 0.16);
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#missionDay {
+    color: var(--pink);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* =====================================================
+   9. CREW
+===================================================== */
+
+.crew-member {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 14px;
+    margin: 12px 0;
+
+    background: rgba(67, 50, 96, 0.35);
+    border: 1px solid rgba(201, 150, 238, 0.18);
+    border-radius: 12px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.crew-member:hover {
+    transform: translateX(5px);
+    background: rgba(100, 63, 119, 0.3);
+    border-color: rgba(255, 145, 206, 0.4);
+}
+
+.crew-avatar {
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    background: linear-gradient(135deg, #684d9e, #a35e9b);
+    border: 1px solid rgba(255, 190, 230, 0.4);
+    border-radius: 50%;
+
+    font-size: 20px;
+
+    box-shadow: 0 0 16px rgba(202, 121, 209, 0.2);
+}
+
+.crew-member h3 {
+    margin: 0;
+    color: var(--white);
+    font-size: 13px;
+}
+
+.crew-member span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.crew-member .crew-status {
+    margin-left: auto;
+    flex-shrink: 0;
+
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.crew-active {
+    border-color: rgba(121, 232, 189, 0.65);
+    background: rgba(58, 133, 112, 0.13);
+}
+
+.crew-alert {
+    border-color: var(--yellow);
+    background: rgba(255, 213, 140, 0.08);
+}
+
+.crew-activity {
+    display: flex;
+    align-items: flex-start;
+
+    margin-top: 18px;
+    padding: 17px;
+
+    background: rgba(55, 47, 89, 0.55);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.activity-indicator {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+
+    display: inline-block;
+    margin: 7px 10px 0 0;
+
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--green);
+}
+
+.crew-activity strong {
+    color: var(--pink);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.crew-activity p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =====================================================
+   10. OBJECTIVES
+===================================================== */
+
+.objectives {
+    margin-top: 22px;
+}
+
+.objectives > p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.objective-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.objective {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    padding: 15px;
+
+    background: rgba(58, 45, 87, 0.42);
+    border: 1px solid rgba(194, 155, 238, 0.18);
+    border-radius: 10px;
+}
+
+.objective span {
+    color: var(--pink);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.objective p {
+    margin: 0;
+    color: #eae2f7;
+    font-size: 12px;
+}
+
+/* =====================================================
+   11. MISSION LOG AND TIMELINE
+===================================================== */
+
+.mission-log,
+.decision-timeline {
+    margin-top: 20px;
+    padding: 23px;
+
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.mission-log h2,
+.decision-timeline h2 {
+    color: var(--white);
+    font-size: 19px;
+}
+
+.log-entry,
+.decision-entry {
+    padding: 13px 15px;
+    margin: 10px 0;
+
+    background: rgba(48, 43, 82, 0.55);
+    border-left: 3px solid var(--pink);
+    border-radius: 0 9px 9px 0;
+
+    color: #eee7fb;
+    font-size: 12px;
+
+    animation: entryAppear 0.3s ease;
+}
+
+.log-entry strong,
+.decision-entry strong {
+    color: var(--pink);
+    font-size: 10px;
+    letter-spacing: 0.8px;
+}
+
+.log-entry p,
+.decision-entry p {
+    margin: 5px 0 0;
+}
+
+@keyframes entryAppear {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =====================================================
+   12. MISSION EVENTS
+===================================================== */
+
+.mission-event {
+    margin: 22px 0;
+    padding: 26px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(84, 52, 111, 0.5),
+        rgba(23, 23, 56, 0.96)
+    );
+
+    border: 1px solid rgba(255, 145, 206, 0.38);
+    border-radius: 16px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+.mission-event:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 145, 206, 0.6);
+
+    box-shadow: 0 15px 35px rgba(220, 105, 190, 0.17);
+}
+
+.mission-event h2 {
+    color: #ffb6e0;
+    font-size: 22px;
+}
+
+.mission-event > p:not(.eyebrow) {
+    color: #e6dff5;
+    font-size: 13px;
+}
+
+.event-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.event-choice {
+    flex: 1 1 200px;
+    text-align: left;
+}
+
+/* =====================================================
+   13. NASA DATA CENTER
+===================================================== */
+
+.nasa-data-panel {
+    margin: 25px 0;
+    padding: 26px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(26, 29, 65, 0.94),
+        rgba(15, 17, 42, 0.97)
+    );
+
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--pink);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.nasa-data-panel h2 {
+    color: #ffb4df;
+    font-size: 22px;
+}
+
+.nasa-intro,
+.nasa-learning-note,
+.nasa-science-note {
+    color: #d0c6e4;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+#nasaStatus {
+    display: inline-block;
+    padding: 7px 11px;
+
+    background: rgba(75, 178, 132, 0.13);
+    border: 1px solid rgba(121, 232, 189, 0.35);
+    border-radius: 20px;
+
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.nasa-event-card {
+    margin: 16px 0;
+    padding: 19px;
+
+    background: rgba(53, 42, 85, 0.55);
+    border: 1px solid rgba(197, 158, 235, 0.2);
+    border-radius: 12px;
+
+    transition:
+        transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.45s ease,
+        border-color 0.4s ease;
+}
+
+.nasa-event-card:hover {
+    transform: translateY(-7px) scale(1.025);
+
+    border-color: rgba(255, 145, 206, 0.55);
+
+    box-shadow:
+        0 15px 35px rgba(220, 105, 190, 0.2),
+        0 0 18px rgba(166, 107, 218, 0.12);
+}
+
+.nasa-event-card h3 {
+    margin-top: 0;
+    color: #fff0fb;
+    font-size: 15px;
+}
+
+.nasa-event-date {
+    color: #c1b6d8;
+    font-size: 11px;
+}
+
+.nasa-event-explanation {
+    color: #e5ddf3;
+    font-size: 13px;
+}
+
+.nasa-learning-note {
+    margin: 12px 0;
+    padding: 12px;
+
+    background: rgba(10, 11, 32, 0.5);
+    border-radius: 8px;
+}
+
+.nasa-solar {
+    border-left: 4px solid #f1b96e;
+}
+
+.nasa-flare {
+    border-left: 4px solid #ff8c9a;
+}
+
+.nasa-radiation {
+    border-left: 4px solid #c49aff;
+}
+
+.nasa-particle {
+    border-left: 4px solid #82d8ff;
+}
+
+.nasa-storm {
+    border-left: 4px solid #ffe08c;
+}
+
+.nasa-general {
+    border-left: 4px solid var(--cyan);
+}
+
+.nasa-science-briefing {
+    margin-top: 15px;
+    padding: 17px;
+
+    background: rgba(10, 11, 32, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    color: #eee8fa;
+}
+
+.nasa-original-message {
+    color: var(--muted);
+    font-size: 11px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.nasa-event-link,
+.nasa-data-panel a {
+    display: inline-block;
+    margin-top: 12px;
+
+    color: var(--cyan);
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.nasa-event-link:hover,
+.nasa-data-panel a:hover {
+    text-decoration: underline;
+}
+
+.nasa-credit {
+    margin-top: 18px;
+    color: var(--dim);
+    font-size: 10px;
+}
+
+/* =====================================================
+   14. NASA ADVISORY
+===================================================== */
+
+.nasa-advisory {
+    margin: 20px 0;
+    padding: 23px;
+
+    background: rgba(130, 91, 43, 0.17);
+    border: 1px solid rgba(255, 213, 140, 0.35);
+    border-radius: 13px;
+}
+
+.nasa-advisory h2,
+.nasa-advisory h3 {
+    color: var(--yellow);
+}
+
+.nasa-advisory p {
+    color: #f0e3ce;
+    font-size: 13px;
+}
+
+/* =====================================================
+   15. MISSION MONITOR AND ALERTS
+===================================================== */
+
+.crew-mission-monitor,
+.mission-alerts {
+    margin: 22px 0;
+    padding: 23px;
+
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.crew-mission-monitor h2,
+.mission-alerts h2 {
+    color: var(--white);
+    font-size: 19px;
+}
+
+.overall-mission-status {
+    padding: 13px;
+    margin: 13px 0;
+
+    background: rgba(53, 45, 84, 0.55);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+}
+
+.overall-mission-status.completed,
+.overall-mission-status.normal,
+.resource-stable,
+.alert-stable {
+    color: var(--green);
+}
+
+.overall-mission-status.standby,
+.overall-mission-status.warning,
+.resource-low,
+.alert-warning {
+    color: var(--yellow);
+}
+
+.overall-mission-status.critical,
+.resource-critical,
+.alert-critical {
+    color: var(--red);
+}
+
+.resource-alert-list,
+.mission-alert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.resource-alert-card,
+.mission-alert-card {
+    min-width: 0;
+    padding: 15px;
+
+    background: rgba(54, 45, 84, 0.48);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    color: #f1eafb;
+}
+
+.resource-alert-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    font-size: 11px;
+}
+
+.resource-alert-heading span {
+    font-weight: 800;
+}
+
+.resource-alert-card p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.mission-alert-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mission-alert-description {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.mission-alert-card h3 {
+    color: var(--white);
+    font-size: 13px;
+}
+
+.mission-alert-card strong {
+    color: var(--pink);
+    font-size: 21px;
+}
+
+.mission-alert-card p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.overall-alert {
+    padding: 9px 12px;
+    margin-bottom: 15px;
+
+    background: rgba(55, 46, 83, 0.5);
+    border-radius: 9px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.alert-complete,
+.alert-stable,
+.mission-alert-card.stable {
+    border-left: 3px solid var(--green);
+}
+
+.alert-warning,
+.mission-alert-card.warning {
+    border-left: 3px solid var(--yellow);
+}
+
+.alert-critical,
+.mission-alert-card.critical {
+    border-left: 3px solid var(--red);
+}
+
+/* =====================================================
+   16. RESOURCE WARNINGS
+===================================================== */
+
+.resource-warning {
+    border-color: var(--yellow) !important;
+}
+
+.resource-critical {
+    border-color: var(--red) !important;
+    box-shadow: 0 0 18px rgba(255, 129, 142, 0.12);
+}
+
+.resource-critical .resource-alert-fill,
+.resource-critical .alert-resource-fill {
+    background: var(--red);
+}
+
+.resource-low .resource-alert-fill {
+    background: var(--yellow);
+}
+
+.criticalPulse {
+    animation: criticalPulse 1.5s infinite;
+}
+
+@keyframes criticalPulse {
+    50% {
+        opacity: 0.55;
+    }
+}
+
+/* =====================================================
+   17. MISSION REPORT
+===================================================== */
+
+.mission-report {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 35px auto;
+    padding: 30px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(33, 27, 65, 0.97),
+        rgba(14, 15, 39, 0.98)
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 17px;
+
+    box-shadow: var(--shadow);
+}
+
+#missionReport {
+    scroll-margin-top: 100px;
+}
+
+.report-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.report-header h2 {
+    color: var(--white);
+    font-size: 26px;
+}
+
+.report-header h3 {
+    color: var(--pink);
+}
+
+.report-header p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.report-score {
+    margin: 22px 0;
+}
+
+.report-score > span {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.score-number {
+    color: var(--pink);
+    font-size: 43px;
+    font-weight: 800;
+
+    text-shadow: 0 0 16px rgba(255, 145, 206, 0.2);
+}
+
+.score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    border-radius: inherit;
+}
+
+.report-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 20px 0;
+}
+
+.report-stat,
+.final-resource {
+    padding: 16px;
+
+    background: rgba(61, 48, 94, 0.48);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.report-stat span {
+    font-size: 20px;
+}
+
+.report-stat h3 {
+    color: var(--white);
+    font-size: 18px;
+}
+
+.report-stat p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.resource-report-title {
+    margin-top: 25px;
+    color: var(--pink);
+    font-size: 17px;
+}
+
+.final-resource-report {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.resource-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    color: #f0eafa;
+    font-size: 12px;
+}
+
+.resource-heading strong {
+    color: var(--pink);
+}
+
+.report-footer {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* =====================================================
+   18. ACHIEVEMENTS
+===================================================== */
+
+.achievement-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 12px 15px;
+    margin: 7px;
+
+    background: rgba(157, 102, 174, 0.19);
+    border: 1px solid rgba(255, 164, 218, 0.35);
+    border-radius: 10px;
+
+    color: #ffd2ec;
+    font-size: 12px;
+
+    box-shadow: 0 0 14px rgba(255, 145, 206, 0.08);
+}
+
+.achievement-badge h4 {
+    margin: 0;
+    color: var(--pink);
+    font-size: 13px;
+}
+
+.achievement-badge p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* =====================================================
+   19. MISSION CELEBRATION
+===================================================== */
+
+.mission-celebration {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+    overflow-y: auto;
+
+    background:
+        radial-gradient(circle at 50% 45%, rgba(167, 105, 204, 0.32), transparent 45%),
+        linear-gradient(145deg, #21163e, #0c0d29 65%, #080817);
+
+    text-align: center;
+}
+
+.celebration-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 650px;
+}
+
+.celebration-moon {
+    font-size: 75px;
+    animation: moonFloat 5s ease-in-out infinite;
+}
+
+@keyframes moonFloat {
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.celebration-content h1 {
+    color: var(--white);
+    font-size: clamp(30px, 5vw, 48px);
+    text-shadow: 0 0 20px rgba(255, 145, 206, 0.3);
+}
+
+.celebration-message {
+    color: #e9def7;
+    font-size: 14px;
+}
+
+.celebration-score {
+    margin: 22px 0;
+    color: var(--pink);
+}
+
+.celebration-score span {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.celebration-score strong {
+    display: block;
+    font-size: 42px;
+}
+
+.celebration-achievement {
+    margin: 20px 0;
+    color: var(--green);
+    font-size: 13px;
+}
+
+.celebration-footer {
+    margin-top: 25px;
+    color: #d0c5e8;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.celebration-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 70% 65%, white, transparent),
+        radial-gradient(1px 1px at 45% 80%, white, transparent);
+
+    background-size: 220px 220px;
+    opacity: 0.55;
+}
+
+/* =====================================================
+   20. CELEBRATION AND REPORT BUTTONS
+===================================================== */
+
+#viewMissionReportBtn,
+#celebrationRestartBtn,
+#reportRestartBtn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+
+    margin: 15px auto;
+    padding: 14px 20px;
+
+    border: 1px solid rgba(255, 170, 220, 0.5);
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #ec79bd, #a66bda);
+
+    color: #ffffff;
+
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        filter 0.35s ease;
+}
+
+#viewMissionReportBtn:hover,
+#celebrationRestartBtn:hover,
+#reportRestartBtn:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow: 0 10px 28px rgba(220, 105, 190, 0.35);
+
+    filter: brightness(1.12);
+}
+
+#celebrationRestartBtn {
+    background: rgba(30, 27, 65, 0.9);
+}
+
+/* =====================================================
+   21. NASA MISSION IMPACT SYSTEM
+===================================================== */
+
+.nasa-observation-details {
+    margin: 20px 0;
+    padding: 18px;
+
+    border: 1px solid rgba(231, 135, 203, 0.25);
+    border-radius: 14px;
+
+    background: rgba(178, 105, 190, 0.08);
+}
+
+.nasa-observation-details strong {
+    display: block;
+    margin-top: 10px;
+
+    color: #e99bd3;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.nasa-observation-details p {
+    margin: 6px 0;
+}
+
+.nasa-simulation-label {
+    padding: 14px;
+
+    border-left: 3px solid #d68bd1;
+
+    background: rgba(214, 139, 209, 0.08);
+
+    color: #e2cce8;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.nasa-science-note {
+    padding: 16px;
+    margin: 15px 0;
+
+    border-radius: 12px;
+
+    background: rgba(102, 135, 190, 0.10);
+}
+
+.nasa-science-note strong {
+    color: #c5a8f0;
+    letter-spacing: 1px;
+}
+
+.nasa-science-note p {
+    line-height: 1.7;
+}
+
+/* =====================================================
+   22. COSMIC IMAGE AND CARD ANIMATIONS
+===================================================== */
+
+/* NASA and crew images */
+
+.nasa-event-card img,
+.crew-card img,
+.nasa-data-panel img {
+    display: block;
+
+    transition:
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.5s ease;
+}
+
+.nasa-event-card:hover img,
+.crew-card:hover img {
+    transform: scale(1.08);
+    filter: brightness(1.12) saturate(1.15);
+}
+
+/* Crew card */
+
+.crew-card:hover {
+    transform: translateY(-7px) scale(1.025);
+
+    border-color: rgba(255, 145, 206, 0.55);
+
+    box-shadow:
+        0 15px 35px rgba(220, 105, 190, 0.2),
+        0 0 18px rgba(166, 107, 218, 0.12);
+}
+
+/* =====================================================
+   23. FOOTER
+===================================================== */
+
+footer {
+    padding: 32px 15px;
+
+    background: rgba(8, 8, 23, 0.9);
+    border-top: 1px solid var(--border);
+
+    color: var(--muted);
+    text-align: center;
+    font-size: 11px;
+}
+
+footer h2 {
+    color: var(--white);
+    letter-spacing: 2px;
+}
+
+footer p {
+    color: var(--pink);
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+footer span {
+    display: block;
+    margin-top: 5px;
+}
+
+/* =====================================================
+   24. INTERACTION AND ACCESSIBILITY
+===================================================== */
+
+a {
+    color: var(--cyan);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+::selection {
+    color: #fff;
+    background: rgba(190, 100, 177, 0.65);
+}
+
+/* =====================================================
+   25. RESPONSIVE DESIGN
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .control-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content {
+        width: 85%;
+    }
+
+    .report-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 12px 5%;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .logo span {
+        font-size: 7px;
+    }
+
+    .nav-status {
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    main {
+        width: 92%;
+    }
+
+    .hero-section {
+        width: 92%;
+        min-height: 470px;
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 30px 24px 110px;
+    }
+
+    .hero-content h1 {
+        font-size: 38px;
+    }
+
+    .hero-content .hero-description {
+        font-size: 12px;
+    }
+
+    .hero-bottom {
+        right: 17px;
+        left: 17px;
+        bottom: 15px;
+
+        gap: 7px 14px;
+        font-size: 8px;
+    }
+
+    .dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .resource {
+        padding: 15px;
+    }
+
+    .resource p {
+        font-size: 25px;
+    }
+
+    .resource-icon {
+        font-size: 21px;
+    }
+
+    .objective-list,
+    .resource-alert-list,
+    .mission-alert-grid,
+    .final-resource-report {
+        grid-template-columns: 1fr;
+    }
+
+    .report-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .event-choices {
+        flex-direction: column;
+    }
+
+    .mission-report {
+        width: 92%;
+        padding: 19px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .control-card,
+    .crew-card,
+    .objectives {
+        padding: 19px;
+    }
+
+    .mission-alert-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .crew-member {
+        gap: 9px;
+        padding: 11px;
+    }
+
+    .crew-avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+
+    /* Avoid oversized hover effects on touch screens */
+
+    button:hover:not(:disabled),
+    .resource:hover,
+    .crew-card:hover,
+    .nasa-event-card:hover,
+    .mission-event:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .nav-status {
+        font-size: 7px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+    }
+}
+
+/* =====================================================
+   26. REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    button:hover,
+    .hero-section:hover,
+    .resource:hover,
+    .crew-card:hover,
+    .nasa-event-card:hover,
+    .mission-event:hover,
+    .crew-member:hover {
+        transform: none !important;
+    }
+}
+
+/* ==========================================
+   NASA RADLAB - RADIATION RESEARCH
+========================================== */
+
+.radiation-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto;
+}
+
+.radiation-heading {
+    margin-bottom: 25px;
+}
+
+.radiation-heading .section-tag {
+    color: #ff91ce;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.radiation-heading h2 {
+    color: #fff;
+    font-size: 30px;
+    margin: 12px 0;
+}
+
+.radiation-heading p {
+    color: #bdb8ce;
+}
+
+.radiation-panel {
+    padding: 28px;
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(30, 20, 55, 0.95),
+        rgba(13, 18, 38, 0.96)
+    );
+    border: 1px solid rgba(255, 145, 206, 0.22);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.radiation-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.radiation-label {
+    color: #ff91ce;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.radiation-topbar h3 {
+    color: white;
+    font-size: 23px;
+    margin-top: 8px;
+}
+
+.radiation-status {
+    color: #9de8cf;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border: 1px solid rgba(157, 232, 207, 0.3);
+    padding: 9px 13px;
+    border-radius: 20px;
+}
+
+.radiation-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.radiation-stat {
+    padding: 22px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: 0.3s ease;
+}
+
+.radiation-stat:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 145, 206, 0.45);
+}
+
+.radiation-stat span {
+    color: #c4b9d8;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.radiation-stat h2 {
+    color: #ff9bd5;
+    font-size: 27px;
+    margin: 15px 0 5px;
+    overflow-wrap: anywhere;
+}
+
+.radiation-stat small {
+    color: #a9a3ba;
+}
+
+.radiation-details {
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.radiation-details p {
+    color: #bdb8ce;
+    margin: 9px 0;
+    font-size: 13px;
+}
+
+.radiation-details strong {
+    color: white;
+}
+
+.radiation-message {
+    color: #c8bdd8;
+    margin: 20px 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#refreshRadiationBtn {
+    padding: 12px 20px;
+    color: white;
+    border: 1px solid rgba(255, 145, 206, 0.4);
+    border-radius: 10px;
+    background: rgba(190, 90, 170, 0.2);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#refreshRadiationBtn:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: rgba(190, 90, 170, 0.4);
+}
+
+.radiation-panel > a {
+    display: inline-block;
+    margin-left: 18px;
+    color: #ff9bd5;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.radiation-panel > a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 750px) {
+    .radiation-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .radiation-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .radiation-panel > a {
+        display: block;
+        margin: 18px 0 0;
+    }
+}
+/* ==========================================
+   NASA RADIATION HISTORY CHART
+========================================== */
+
+.radiation-chart-card {
+    width: 100%;
+    margin-top: 25px;
+    padding: 22px;
+    border: 1px solid rgba(220, 160, 255, 0.18);
+    border-radius: 18px;
+    background: linear-gradient(
+        145deg,
+        rgba(30, 20, 55, 0.85),
+        rgba(12, 17, 38, 0.95)
+    );
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.radiation-chart-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.radiation-chart-heading h3 {
+    margin: 0;
+    color: #f4d9ff;
+    font-size: 18px;
+}
+
+.radiation-chart-heading p {
+    margin: 6px 0 0;
+    color: #aaa5c5;
+    font-size: 12px;
+}
+
+.chart-live-label {
+    padding: 7px 11px;
+    border: 1px solid rgba(211, 153, 255, 0.25);
+    border-radius: 20px;
+    color: #e6baff;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.radiation-chart-container {
+    position: relative;
+    width: 100%;
+    height: 280px;
+}
+
+.radiation-chart-note {
+    margin: 15px 0 0;
+    color: #9691ad;
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    .radiation-chart-card {
+        padding: 15px;
+    }
+
+    .radiation-chart-container {
+        height: 230px;
+    }
+
+    .radiation-chart-heading {
+        align-items: flex-start;
+    }
+}
+
+/* =================================
+   LUNAMIND SPACE MUSIC PLAYER
+================================= */
+
+.music-player {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 13px 18px;
+
+    background: rgba(19, 15, 42, 0.92);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(220, 160, 255, 0.35);
+    border-radius: 18px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+#musicToggle {
+    border: none;
+    background: transparent;
+    color: #edc5ff;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+#musicToggle:hover {
+    color: white;
+}
+
+.music-volume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#musicVolume {
+    width: 75px;
+    accent-color: #d99aff;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .music-player {
+        right: 12px;
+        bottom: 12px;
+        padding: 11px;
+        gap: 8px;
+    }
+
+    #musicToggle {
+        font-size: 10px;
+    }
+
+    #musicVolume {
+        width: 55px;
+    }
+}
